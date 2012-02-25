@@ -1,0 +1,43 @@
+name: SimpleWorldWarp
+version: 1.0
+description: Warp between worlds. Simply.
+author: BradSmith
+website: http://infinitewarp.com/minecraft/
+
+main: com.infinitewarp.simpleworldwarp.SimpleWorldWarp
+database: false
+load: STARTUP
+
+commands:
+    wcreate:
+        description: Creates a new world
+        usage: /<command> [name] [environment] <seed>
+    wlist:
+        description: Lists worlds
+        usage: /<command>    
+    wwarp:
+        description: Warps you to a world
+        usage: /<command> [name]
+    wdelete:
+        description: Deletes a world
+        usage: /<command> [name]
+permissions:
+    simpleworldwarp.*:
+        description: Gives access to all SimpleWorldWarp commands
+        children:
+            simpleworldwarp.wcreate: false
+            simpleworldwarp.wdelete: false
+            simpleworldwarp.wwarp: false
+            simpleworldwarp.wlist: false
+    simpleworldwarp.wcreate:
+        description: Allows you to create a world
+        default: false
+    simpleworldwarp.wdelete:
+        description: Allows you to delete a world
+        default: false
+    simpleworldwarp.wwarp:
+        description: Allows you to warp to a world
+        default: false
+    simpleworldwarp.wlist:
+        description: Allows you to list worlds
+        default: false
