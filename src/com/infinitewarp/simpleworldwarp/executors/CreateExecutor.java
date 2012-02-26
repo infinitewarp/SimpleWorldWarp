@@ -45,7 +45,7 @@ public class CreateExecutor extends AbstractExecutor {
         getMessager().send(sender, "Creating world '" + worldName + "'...");
 
         getPlugin().getServer().createWorld(worldCreator);
-        getPlugin().getConfig().set("worlds." + worldName + ".environment", environment);
+        getPlugin().getConfig().set("worlds." + worldName + ".environment", environment.toString());
         getPlugin().getConfig().set("worlds." + worldName + ".seed",
                 getPlugin().getServer().getWorld(worldName).getSeed());
         getPlugin().saveConfig();
