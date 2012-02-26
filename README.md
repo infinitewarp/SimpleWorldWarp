@@ -31,5 +31,6 @@ By default, all SimpleWorldWarp commands are disabled for all users.
 Version History
 ---------------
 
+* *1.0.2*: Remove unnecessary logging. Consistently save loaded world metadata upon plugin reload.
 * *1.0.1*: Maintain world metadata across server restarts.
 * *1.0*: Initial release!

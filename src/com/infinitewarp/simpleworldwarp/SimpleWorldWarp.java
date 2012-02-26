@@ -66,24 +66,18 @@ public class SimpleWorldWarp extends JavaPlugin {
         List<World> runningWorlds = getServer().getWorlds();
         for (World world : runningWorlds) {
             String worldName = world.getName();
-            if (!savedWorldNames.contains(worldName)) {
-                log.info(LOG_PREFIX + "Adding world '" + worldName + "' to saved world list config.");
-                getConfig().set("worlds." + worldName + ".seed", world.getSeed());
-                getConfig().set("worlds." + worldName + ".environment", world.getEnvironment().toString());
-            }
+            log.info(LOG_PREFIX + "Adding world '" + worldName + "' to saved world list config.");
+            getConfig().set("worlds." + worldName + ".seed", world.getSeed());
+            getConfig().set("worlds." + worldName + ".environment", world.getEnvironment().toString());
         }
 
         saveConfig();
     }
 
     private boolean startupWorldName(String worldName) {
-        log.info(worldName);
-        String seedName = getConfig().getString("worlds." + worldName + ".seed");
-        log.info(seedName);
         String environmentName = getConfig().getString("worlds." + worldName + ".environment");
-        log.info(environmentName);
 
-        Long seed = Long.valueOf(seedName);
+        Long seed = Long.valueOf(getConfig().getString("worlds." + worldName + ".seed"));
         if (seed == null || environmentName == null) {
             return false;
         }
