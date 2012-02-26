@@ -27,6 +27,10 @@ public class DeleteExecutor extends AbstractExecutor {
         }
 
         getPlugin().getServer().unloadWorld(worldName, true);
+
+        getPlugin().getConfig().set("worlds." + worldName, null);
+        getPlugin().saveConfig();
+
         getMessager().send(sender, "World '" + worldName + "' successfully unloaded!");
         sender.sendMessage("Remember to manually delete world folder.");
 

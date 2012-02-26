@@ -1,12 +1,11 @@
 name: SimpleWorldWarp
-version: 1.0
+version: 1.0.1
 description: Warp between worlds. Simply.
 author: BradSmith
 website: http://infinitewarp.com/minecraft/
 
 main: com.infinitewarp.simpleworldwarp.SimpleWorldWarp
 database: false
-load: STARTUP
 
 commands:
     wcreate:

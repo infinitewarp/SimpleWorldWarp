@@ -13,7 +13,7 @@ Installation
 Configuration
 -------------
 
-SimpleWorldWarp is simple! It has no plugin-specific configuration file. It simply works with the worlds running on your bukkit server.
+SimpleWorldWarp is simple! It simply works with the worlds running on your bukkit server. If you add new worlds, SimpleWorldWarp automatically maintains its own config file to track and reload those new worlds upon server restart.
 
 Permissions
 -----------
@@ -31,4 +31,5 @@ By default, all SimpleWorldWarp commands are disabled for all users.
 Version History
 ---------------
 
+* *1.0.1*: Maintain world metadata across server restarts.
 * *1.0*: Initial release!
