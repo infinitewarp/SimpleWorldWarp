@@ -3,7 +3,6 @@ package com.infinitewarp.simpleworldwarp;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
 
 import org.bukkit.World;
 import org.bukkit.World.Environment;
@@ -17,11 +16,9 @@ import com.infinitewarp.simpleworldwarp.executors.WarpExecutor;
 
 public class SimpleWorldWarp extends JavaPlugin {
     private static final String PLUGIN_NAME = "SimpleWorldWarp";
-    private static final String LOG_PREFIX = "[" + PLUGIN_NAME + "] ";
     private static final String PERMISSION_ROOT = PLUGIN_NAME.toLowerCase();
 
-    private static final Logger log = Logger.getLogger("Minecraft");
-    private static final StylizedMessager messager = new StylizedMessager(LOG_PREFIX);
+    private static final StylizedMessager messager = new StylizedMessager("[" + PLUGIN_NAME + "] ");
 
     @Override
     public void onEnable() {
@@ -30,12 +27,12 @@ public class SimpleWorldWarp extends JavaPlugin {
         getCommand("wcreate").setExecutor(new CreateExecutor(this, PERMISSION_ROOT, messager));
         getCommand("wdelete").setExecutor(new DeleteExecutor(this, PERMISSION_ROOT, messager));
         getCommand("wlist").setExecutor(new ListExecutor(this, PERMISSION_ROOT, messager));
-        log.info(LOG_PREFIX + PLUGIN_NAME + " is now enabled.");
+        getLogger().info(PLUGIN_NAME + " is now enabled.");
     }
 
     @Override
     public void onDisable() {
-        log.info(LOG_PREFIX + PLUGIN_NAME + " is now disabled.");
+        getLogger().info(PLUGIN_NAME + " is now disabled.");
     }
 
     private void initializeWorlds() {
@@ -46,7 +43,7 @@ public class SimpleWorldWarp extends JavaPlugin {
             for (String worldName : savedWorldNames) {
                 if (getServer().getWorld(worldName) == null) {
                     if (!startupWorldName(worldName)) {
-                        log.warning(LOG_PREFIX + "Invalid config encountered for world '" + worldName
+                        getLogger().warning("Invalid config encountered for world '" + worldName
                                 + "'. Removing world from config.");
                         getConfig().set("worlds." + worldName, null);
                     }
@@ -58,7 +55,7 @@ public class SimpleWorldWarp extends JavaPlugin {
             }
         } catch (NullPointerException e) {
             // getKeys may throw NPE if config doesn't have a "worlds" section.
-            log.warning(LOG_PREFIX + "Caught NPE while loading worlds from config");
+            getLogger().warning("Caught NPE while loading worlds from config");
             e.printStackTrace();
         }
 
@@ -66,7 +63,7 @@ public class SimpleWorldWarp extends JavaPlugin {
         List<World> runningWorlds = getServer().getWorlds();
         for (World world : runningWorlds) {
             String worldName = world.getName();
-            log.info(LOG_PREFIX + "Adding world '" + worldName + "' to saved world list config.");
+            getLogger().info("Adding world '" + worldName + "' to saved world list config.");
             getConfig().set("worlds." + worldName + ".seed", world.getSeed());
             getConfig().set("worlds." + worldName + ".environment", world.getEnvironment().toString());
         }
@@ -89,7 +86,7 @@ public class SimpleWorldWarp extends JavaPlugin {
             return false;
         }
 
-        log.info(LOG_PREFIX + "Attempting to start up world " + worldName);
+        getLogger().info("Attempting to start up world " + worldName);
         WorldCreator creator = new WorldCreator(worldName);
         creator.seed(seed);
         creator.environment(environment);
